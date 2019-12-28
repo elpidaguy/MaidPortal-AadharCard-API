@@ -1,2 +1,2 @@
-# projectPOS
-POS repository for project at CDAC
+# projectPOC
+POC repository for project at CDAC
