@@ -1,0 +1,15 @@
+E:\PRI .NET\Aadhar\BLL\bin\Debug\BLL.dll
+E:\PRI .NET\Aadhar\BLL\bin\Debug\BLL.pdb
+E:\PRI .NET\Aadhar\BLL\bin\Debug\BOL.dll
+E:\PRI .NET\Aadhar\BLL\bin\Debug\DAL.dll
+E:\PRI .NET\Aadhar\BLL\bin\Debug\MySql.Data.dll
+E:\PRI .NET\Aadhar\BLL\bin\Debug\Google.Protobuf.dll
+E:\PRI .NET\Aadhar\BLL\bin\Debug\BouncyCastle.Crypto.dll
+E:\PRI .NET\Aadhar\BLL\bin\Debug\Renci.SshNet.dll
+E:\PRI .NET\Aadhar\BLL\bin\Debug\BOL.pdb
+E:\PRI .NET\Aadhar\BLL\bin\Debug\DAL.pdb
+E:\PRI .NET\Aadhar\BLL\bin\Debug\MySql.Data.xml
+E:\PRI .NET\Aadhar\BLL\obj\Debug\BLL.csprojAssemblyReference.cache
+E:\PRI .NET\Aadhar\BLL\obj\Debug\BLL.csproj.CopyComplete
+E:\PRI .NET\Aadhar\BLL\obj\Debug\BLL.dll
+E:\PRI .NET\Aadhar\BLL\obj\Debug\BLL.pdb

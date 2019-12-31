@@ -1,0 +1,4 @@
+E:\PRI .NET\Aadhar\BOL\bin\Debug\BOL.dll
+E:\PRI .NET\Aadhar\BOL\bin\Debug\BOL.pdb
+E:\PRI .NET\Aadhar\BOL\obj\Debug\BOL.dll
+E:\PRI .NET\Aadhar\BOL\obj\Debug\BOL.pdb
