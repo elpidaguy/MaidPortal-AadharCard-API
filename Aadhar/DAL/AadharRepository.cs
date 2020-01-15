@@ -11,11 +11,16 @@ namespace DAL
 {
     public static class AadharDAL
     {
+        static string connString = "";
+        static AadharDAL()
+        {
+            connString = "server=localhost;user id=root;database=project;persistsecurityinfo=True;port=3306;allowuservariables=True;password=Root1234@";
+        }
         public static List<Aadhar> GetAll()
         {
             List<Aadhar> aadhars = new List<Aadhar>();
-            string cmdText = "select * from aadharDetails";
-            MySqlConnection connection = new MySqlConnection("server=localhost;user id=root;database=aadhar;persistsecurityinfo=True;port=3333;allowuservariables=True;password=actscdac");
+            string cmdText = "select * from aadhar";
+            MySqlConnection connection = new MySqlConnection(connString);
             connection.Open();
             MySqlCommand command = new MySqlCommand(cmdText, connection);
             IDataReader reader = command.ExecuteReader();
@@ -26,7 +31,26 @@ namespace DAL
                 aadhar.Name = Convert.ToString(reader["name"]);
                 aadhar.Gender = Convert.ToString(reader["gender"]);
                 aadhar.DateOfBirth = Convert.ToDateTime(reader["dateOfBirth"]);
-                aadhar.Address = Convert.ToString(reader["address"]);
+                Address address = new Address();
+                string cmdText1 = "select * from addresses where aadharNumber =" + aadhar.AadharNumber;
+                MySqlConnection connection1 = new MySqlConnection(connString);
+                connection1.Open();
+                MySqlCommand command1 = new MySqlCommand(cmdText1, connection1);
+                IDataReader reader1 = command1.ExecuteReader();
+                if (reader1.Read())
+                {
+                    address.AadharNumber = aadhar.AadharNumber;
+                    address.ApartmentNo = Convert.ToString(reader1["apartmentNo"]);
+                    address.BuildingName = Convert.ToString(reader1["buildingName"]);
+                    address.Street = Convert.ToString(reader1["street"]);
+                    address.Landmark = Convert.ToString(reader1["landmark"]);
+                    address.City = Convert.ToString(reader1["city"]);
+                    address.State = Convert.ToString(reader1["state"]);
+                    address.Pincode = Convert.ToString(reader1["pincode"]);
+                }
+                reader1.Close();
+                connection1.Close();
+                aadhar.Address = address;
                 aadhars.Add(aadhar);
             }
             reader.Close();
@@ -36,20 +60,36 @@ namespace DAL
         public static Aadhar GetAadhar(int aadharNumber)
         {
             Aadhar aadhar = new Aadhar();
-            string cmdText = "select * from aadharDetails where aadharNumber =" + aadharNumber;
-            MySqlConnection connection = new MySqlConnection("server=localhost;user id=root;database=aadhar;persistsecurityinfo=True;port=3333;allowuservariables=True;password=actscdac");
+            Address address = new Address();
+            string cmdText1 = "select * from aadhar where aadharNumber =" + aadharNumber;
+            string cmdText2 = "select * from addresses where aadharNumber =" + aadharNumber;
+            MySqlConnection connection = new MySqlConnection(connString);
             connection.Open();
-            MySqlCommand command = new MySqlCommand(cmdText, connection);
-            IDataReader reader = command.ExecuteReader();
-            if (reader.Read())
+            MySqlCommand command2 = new MySqlCommand(cmdText2, connection);
+            IDataReader reader2 = command2.ExecuteReader();
+            if (reader2.Read())
             {
-                aadhar.AadharNumber = int.Parse(reader["aadharNumber"].ToString());
-                aadhar.Name = Convert.ToString(reader["name"]);
-                aadhar.Gender = Convert.ToString(reader["gender"]);
-                aadhar.DateOfBirth = Convert.ToDateTime(reader["dateOfBirth"]);
-                aadhar.Address = Convert.ToString(reader["address"]);
+                address.AadharNumber = aadharNumber;
+                address.ApartmentNo = Convert.ToString(reader2["apartmentNo"]);
+                address.BuildingName = Convert.ToString(reader2["buildingName"]);
+                address.Street = Convert.ToString(reader2["street"]);
+                address.Landmark = Convert.ToString(reader2["landmark"]);
+                address.City = Convert.ToString(reader2["city"]);
+                address.State = Convert.ToString(reader2["state"]);
+                address.Pincode = Convert.ToString(reader2["pincode"]);
             }
-            reader.Close();
+            reader2.Close();
+            MySqlCommand command1 = new MySqlCommand(cmdText1, connection);
+            IDataReader reader1 = command1.ExecuteReader();
+            if (reader1.Read())
+            {
+                aadhar.AadharNumber = int.Parse(reader1["aadharNumber"].ToString());
+                aadhar.Name = Convert.ToString(reader1["name"]);
+                aadhar.Gender = Convert.ToString(reader1["gender"]);
+                aadhar.DateOfBirth = Convert.ToDateTime(reader1["dateOfBirth"]);
+                aadhar.Address = address;
+            }
+            reader1.Close();
             connection.Close();
             return aadhar;
         }
