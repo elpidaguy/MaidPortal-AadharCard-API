@@ -12,6 +12,7 @@ namespace BOL
         public string Name { get; set; }
         public string Gender { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public int ContactNo { get; set; }
         
         public virtual Address Address { get; set; }
     }

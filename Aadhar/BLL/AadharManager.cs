@@ -18,5 +18,13 @@ namespace BLL
         {
             return AadharDAL.GetAadhar(aadharNumber);
         }
+        public static bool GetByContactNo(int contactNo)
+        {
+            return AadharDAL.GetByContactNo(contactNo);
+        }
+        public static Aadhar GetAadharByContactNo(int contactNo)
+        {
+            return AadharDAL.GetAadharByContactNo(contactNo);
+        }
     }
 }

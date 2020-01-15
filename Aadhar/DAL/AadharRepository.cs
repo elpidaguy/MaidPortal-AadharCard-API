@@ -31,6 +31,7 @@ namespace DAL
                 aadhar.Name = Convert.ToString(reader["name"]);
                 aadhar.Gender = Convert.ToString(reader["gender"]);
                 aadhar.DateOfBirth = Convert.ToDateTime(reader["dateOfBirth"]);
+                aadhar.ContactNo = int.Parse(reader["contactNo"].ToString());
                 Address address = new Address();
                 string cmdText1 = "select * from addresses where aadharNumber =" + aadhar.AadharNumber;
                 MySqlConnection connection1 = new MySqlConnection(connString);
@@ -87,9 +88,46 @@ namespace DAL
                 aadhar.Name = Convert.ToString(reader1["name"]);
                 aadhar.Gender = Convert.ToString(reader1["gender"]);
                 aadhar.DateOfBirth = Convert.ToDateTime(reader1["dateOfBirth"]);
+                aadhar.ContactNo = int.Parse(reader1["contactNo"].ToString());
                 aadhar.Address = address;
             }
             reader1.Close();
+            connection.Close();
+            return aadhar;
+        }
+        public static bool GetByContactNo(int contactNo)
+        {
+            bool status = false;
+            Aadhar aadhar = new Aadhar();
+            string cmdText = "select * from aadhar where contactNo = " + contactNo;
+            MySqlConnection connection = new MySqlConnection(connString);
+            connection.Open();
+            MySqlCommand command = new MySqlCommand(cmdText, connection);
+            IDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                /*aadhar.AadharNumber = int.Parse(reader["aadharNumber"].ToString());
+                aadhar = GetAadhar(aadhar.AadharNumber);*/
+                status = true;
+            }
+            reader.Close();
+            connection.Close();
+            return status;
+        }
+        public static Aadhar GetAadharByContactNo(int contactNo)
+        { 
+            Aadhar aadhar = new Aadhar();
+            string cmdText = "select * from aadhar where contactNo = " + contactNo;
+            MySqlConnection connection = new MySqlConnection(connString);
+            connection.Open();
+            MySqlCommand command = new MySqlCommand(cmdText, connection);
+            IDataReader reader = command.ExecuteReader();
+            if (reader.Read())
+            {
+                aadhar.AadharNumber = int.Parse(reader["aadharNumber"].ToString());
+                aadhar = GetAadhar(aadhar.AadharNumber);
+            }
+            reader.Close();
             connection.Close();
             return aadhar;
         }

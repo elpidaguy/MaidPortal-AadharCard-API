@@ -23,7 +23,12 @@ namespace AadharAuthentication.Controllers
        // [Route("/GetAdhaarList/{parameter}")]
         public Aadhar Get(int Id)
         {
-            return AadharManager.GetAadhar(Id);
+            Aadhar aadhar = new Aadhar();
+            if(SendOTPController.otp > 999 && SendOTPController.otp == Id)
+            {
+                aadhar = AadharManager.GetAadharByContactNo(SendOTPController.contactNo);
+            }
+            return aadhar;
         }
 
         // POST: api/AadharVerification
